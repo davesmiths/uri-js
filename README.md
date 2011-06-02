@@ -3,7 +3,7 @@ Banana Split URI Parser
 Lightweight URI parser/splitter, nothing more.
 
 Currently gets returns:
-```js
+``` js
 {
     path: string,
     hash: string,
