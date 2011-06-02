@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Banana Split URI Parser</title>
+<meta charset="utf-8" />
+<title>Banana Split URI Parser</title>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.js"></script>
 <script src="//ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
 <script type="text/javascript" src="banana-split-uri-parser.js"></script>
 <script type="text/javascript">
 //<![CDATA[
-
 $(function() {
     $('form').bind('submit', function() {
         var $this = $(this);
@@ -17,135 +16,59 @@ $(function() {
         $this.next().html('var my_banana_split = ' + JSON.stringify(o,false,4));
         return false;
     });
-  var uri = [
-    '',
-    '#hash',
-    '?key',
-    '?key#hash',
-    '?key=value',
-    '?key=value&key2=value2',
-    '?key=value&amp;key2=value2',
-    '?key=value?bad=bad&key2=value2',
-    '?key=value&key2=value2#hash?asd',
-    '?key=value&key2=value2#hash?asd#otherhash',
-    '?key=value&amp;key2=value2',
-    '#hash?key',
-    'path',
-    'path#hash',
-    'path?key',
-    'path?key#hash',
-    'path#hash?key'
-  ];
-  var html = '';
-  for (var i = 0; i < uri.length; i++) {
-    var o = banana_split(uri[i]);
-    html += 'uri: ' + uri[i];
-    html += "\n" + 'o.path: ' + o.path;
-    html += "\n" + 'o.hash: ' + o.hash;
-    html += "\n" + 'o.query: ' + o.query;
-    if (o.params === false) {
-      html += "\n" + 'o.params: ' + o.params;
-    }
-    else {
-      html += "\n" + 'o.params:';
-      for (var j in o.params) {
-        html += "\n" + j + '=' + o.params[j];
-      }
-    }
-    html += "\n\n";
-  }
-  $('div.taster-test').append('<pre>'+html+'</pre>');
+    $('.example-uris a').bind('click', function() {
+        $('input[type=text]').prop('value', $(this).text());
+        $('form').trigger('submit');
+        return false;
+    });
 });
-
 //]]>
 </script>
+<!-- ZXCSS -->
+<!--[if lte IE 7]><link href="//github.com/davesmith/zxcss/raw/master/css/zxcss-0.5-beta-lte-ie7.min.css" rel="stylesheet" type="text/css" media="all" /><![endif]-->
+<!--[if lte IE 6]><link href="//github.com/davesmith/zxcss/raw/master/css/zxcss-0.5-beta-lte-ie6.min.css" rel="stylesheet" type="text/css" media="all" /><![endif]-->
+<link href="//github.com/davesmith/zxcss/raw/master/css/zxcss-0.5-beta.min.css" rel="stylesheet" />
 <style>
 input[type=text] {width:90%;}
 </style>
 </head>
 <body>
 <h1>Banana Split URI Parser</h1>
-<p class="kwn"><strong>Given a banana (URI) the function will split it and return an ice-cream (object) made from its path, hash, query and params</strong></p>
+<p class="kwn"><strong>Banana in, ice-cream out (read given a uri the function will return an object) made from its path, hash, query and params</strong></p>
 
-<form><label for="uri">Try a URI:</label><br /><input id="uri" type="text" /><br /><input type="submit" value="Give me the ice-cream!" /></form>
+<div class="row">
+<div class="col w1o2">
+<div class="inn">
+<form><p><label for="uri">Try a URI:</label><br /><input id="uri" type="text" /></p><input type="submit" value="Give me the ice-cream!" /></form>
 <pre></pre>
-<pre>&lt;script type=&quot;text/javascript&quot;&gt;
-//&lt;![CDATA[
-
-  // Version 1.1.
-  banana_split = function(uri) {
-    var b,i,len,
-    o = {params: {}, query: false},
-    a = uri.split('#');
-    b = a.shift().split('?');
-    o.hash = a.join('#') || false;
-    o.path = b.shift() || false;
-    a = b.join('?').split('&amp;');
-    if (a[0] !== '') {
-      len = a.length;
-      o.query = a[0];
-      for (i = 0; i &lt; len; i++) {
-        b = a[i].split('=');
-        o.params[b.shift().replace(/^amp;/, '')] = (typeof b[0] === 'undefined') ? true: b.join('=');
-      }
-    }
-    return o;
-  };
-
-//]]&gt;
-&lt;/script&gt;</pre>
-<p>If path, hash or query are empty false is returned. If params is empty an empty object is returned.</p>
-<p>Feedback welcomed.</p>
-<div class="taster-test">
-<h2>Taster Test</h2>
-<pre>&lt;script type=&quot;text/javascript&quot;&gt;
-//&lt;![CDATA[
-
-$(function() {
-  var uri = [
-    '',
-    '#hash',
-    '?key',
-    '?key#hash',
-    '?key=value',
-    '?key=value&amp;key2=value2',
-    '?key=value&amp;amp;key2=value2',
-    '?key=value?bad=bad&amp;key2=value2',
-    '?key=value&amp;key2=value2#hash?asd',
-    '?key=value&amp;key2=value2#hash?asd#otherhash',
-    '?key=value&amp;amp;key2=value2',
-    '#hash?key',
-    'path',
-    'path#hash',
-    'path?key',
-    'path?key#hash',
-    'path#hash?key'
-  ];
-  var html = '';
-  for (var i = 0; i &lt; uri.length; i++) {
-    var o = banana_split(uri[i]);
-    html += 'uri: ' + uri[i];
-    html += &quot;\n&quot; + 'o.path: ' + o.path;
-    html += &quot;\n&quot; + 'o.hash: ' + o.hash;
-    html += &quot;\n&quot; + 'o.query: ' + o.query;
-    if (o.params === false) {
-      html += &quot;\n&quot; + 'o.params: ' + o.params;
-    }
-    else {
-      html += &quot;\n&quot; + 'o.params:';
-      for (var j in o.params)
-      {
-        html += &quot;\n&quot; + j + '=' + o.params[j];
-      }
-    }
-    html += &quot;\n\n&quot;;
-  }
-  $('div.taster-test').append('&lt;pre&gt;'+html+'&lt;/pre&gt;');
-});
-
-//]]&gt;
-&lt;/script&gt;
+</div></div>
+<div class="col w1o2">
+<div class="inn">
+<p>Example URIs, select to try out:</p>
+<pre class="example-uris">
+<a href="#">#hash</a>
+<a href="#">?key</a>
+<a href="#">?key#hash</a>
+<a href="#">?key=value</a>
+<a href="#">?key=value&amp;key2=value2</a>
+<a href="#">?key=value&amp;amp;key2=value2</a>
+<a href="#">?key=value?bad=bad&amp;key2=value2</a>
+<a href="#">?key=value&amp;key2=value2#hash?asd</a>
+<a href="#">?key=value&amp;key2=value2#hash?asd#otherhash</a>
+<a href="#">?key=value&amp;amp;key2=value2</a>
+<a href="#">#hash?key</a>
+<a href="#">path</a>
+<a href="#">path#hash</a>
+<a href="#">path?key</a>
+<a href="#">path?key#hash</a>
+<a href="#">path#hash?key</a>
+<a href="#">/path#hash?key</a>
+<a href="#">//www.example.com/path#hash?key</a>
+<a href="#">http://www.example.com/path#hash?key</a>
+<a href="#">https://www.example.com/path#hash?key</a>
 </pre>
+</div></div>
 </div>
+
 </body>
 </html>
