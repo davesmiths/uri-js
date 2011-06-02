@@ -4,11 +4,19 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Banana Split URI Parser</title>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.js"></script>
+<script src="//ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
 <script type="text/javascript" src="banana-split-uri-parser.js"></script>
 <script type="text/javascript">
 //<![CDATA[
 
 $(function() {
+    $('form').bind('submit', function() {
+        var $this = $(this);
+        var uri = $(this).find('input[type=text]').prop('value');
+        var o = banana_split(uri);
+        $this.next().html('var my_banana_split = ' + JSON.stringify(o,false,4));
+        return false;
+    });
   var uri = [
     '',
     '#hash',
@@ -51,11 +59,16 @@ $(function() {
 
 //]]>
 </script>
+<style>
+input[type=text] {width:90%;}
+</style>
 </head>
 <body>
 <h1>Banana Split URI Parser</h1>
 <p class="kwn"><strong>Given a banana (URI) the function will split it and return an ice-cream (object) made from its path, hash, query and params</strong></p>
-<p>Created 2011 March 7. Modified 2011 March 8</p>
+
+<form><label for="uri">Try a URI:</label><br /><input id="uri" type="text" /><br /><input type="submit" value="Give me the ice-cream!" /></form>
+<pre></pre>
 <pre>&lt;script type=&quot;text/javascript&quot;&gt;
 //&lt;![CDATA[
 
