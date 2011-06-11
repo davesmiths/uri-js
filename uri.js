@@ -1,4 +1,4 @@
-// URI.js 6
+// URI.js 7
 // http://github.com/davesmith/
 var URI = {};
 URI.parse = function(uri, undefined) {
@@ -13,11 +13,12 @@ URI.parse = function(uri, undefined) {
     uri = o.query.shift();
     if ((o.query = o.query.join('?') || undefined)) {
         o.params = o.query.split('&').map(function(v) {
+            var b = {};
             if (v !== '') {
                 v = v.split('=');
-                b = {}[v.shift().replace(/^amp;/, '')] = (typeof v[0] === 'undefined') ? true: v.join('=');
+                b[v.shift().replace(/^amp;/, '')] = (typeof v[0] === 'undefined') ? true: v.join('=');
             }
-            return b || false;
+            return b || undefined;
         });
     }
     
