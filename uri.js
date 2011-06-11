@@ -1,4 +1,4 @@
-// URI.js 5
+// URI.js 6
 // http://github.com/davesmith/
 var URI = {};
 URI.parse = function(uri, undefined) {
@@ -12,17 +12,13 @@ URI.parse = function(uri, undefined) {
     o.query = uri.split('?');
     uri = o.query.shift();
     if ((o.query = o.query.join('?') || undefined)) {
-        a = o.query.split('&');
-        if (a[0] !== '') {
-            o.params = [];
-            len = a.length;
-            for (i = 0; i < len; i++) {
-                b = a[i].split('=');
-                c = {};
-                c[b.shift().replace(/^amp;/, '')] = (typeof b[0] === 'undefined') ? true: b.join('=');
-                o.params.push(c);
-             }
-        }
+        o.params = o.query.split('&').map(function(v) {
+            if (v !== '') {
+                v = v.split('=');
+                b = {}[v.shift().replace(/^amp;/, '')] = (typeof v[0] === 'undefined') ? true: v.join('=');
+            }
+            return b || false;
+        });
     }
     
     // path//, /path//, //www.esas.com/path// http://asdasd.com//
