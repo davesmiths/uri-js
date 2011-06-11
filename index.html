@@ -13,6 +13,7 @@ using('//ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.js',
     function() {
         
         $(function() {
+            
             $('form.parse').bind('submit', function() {
                 var $this = $(this);
                 var uri = $(this).find('input[type=text]').prop('value');
