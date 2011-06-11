@@ -11,9 +11,7 @@ using('//ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.js',
     'uri.js',
     //'js-uri-parser.js',
     function() {
-        
         $(function() {
-            
             $('form.parse').bind('submit', function() {
                 var $this = $(this);
                 var uri = $(this).find('input[type=text]').prop('value');
@@ -80,6 +78,7 @@ textarea {width:90%;}
 <div class="inn">
 <h1>URI.js</h1>
 <p class="kwn"><strong>Adds URI.parse(uriString) and URI.stringify(uriObject) to JavaScript for converting a URI string to a URI object and vice-versa</strong></p>
+<p>Please note that this file may need uploading in order to work properly.</p>
 <form class="parse"><p><label for="uri">Try a URI:</label><br /><input id="uri" type="text" /><br /><input type="submit" value="Give me the ice-cream!" /></p></form>
 <form class="stringify"><p><label for="object">Try an Object:</label><br /><textarea rows="10" id="object"></textarea><br /><input type="submit" value="Give me the banana!" /></p></form>
 </div>
