@@ -1,4 +1,4 @@
-// URI.js 15
+// URI.js  15
 // Creates a URI object with functions URI.parse and URI.stringify
 // http://github.com/davesmith/
 // By Dave Smith: http://www.dave-smith.info/
