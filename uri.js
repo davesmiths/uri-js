@@ -1,4 +1,4 @@
-// URI.js 12
+// URI.js 1
 // http://github.com/davesmith/
 var URI = {};
 URI.parse = function(uri, undefined) {
@@ -25,52 +25,55 @@ URI.parse = function(uri, undefined) {
         uri = uri.join(colon); // uri = rest of URI
     }
     
-    // Get the hash:
-    // 1. Split URI at #s.
-    // 2. URI is string before the first #.
-    // 3. Hash is string after the first #.
-    a = uri.split('#'); // a = [rest of URI, hash, ...]
-    uri = a.shift(); // uri = [rest of URI], a = [hash, ...]
-    o.hash = a.join('#') || undefined; // hash = hash
-    
-    // Get the parameters:
-    // 1. Split URI at ?s.
-    // 2. URI is string before first ?.
-    // 3. If there is a string after ?. Split at & and then = to map a params array.
-    a = uri.split('?'); // a = [rest of URI, query, ...]
-    uri = a.shift(); // uri = rest of URI, a = [query, ...]
-    o.params = (a[0]) ? a.join('?').split('&').map(function(v) {
-        v = v.split('=');
-        return {key: v.shift().replace(/^amp;/, ''), value: v.join('=')};
-    }) : undefined;
-    
-    // Check if URI is protocol relative.
-    if (uri.charAt(0) === slash && uri.charAt(1) === slash) {
+    if ('http,https,ftp'.split(o.scheme, 2)[1]) {
         
-        // Remove the two slashes and split at slashes.
-        uri = (uri.substr(2)).split(slash); // uri = [user:pass@www.asdad.com:8080, segment, ...]
+        // Get the hash:
+        // 1. Split URI at #s.
+        // 2. URI is string before the first #.
+        // 3. Hash is string after the first #.
+        a = uri.split('#'); // a = [rest of URI, hash, ...]
+        uri = a.shift(); // uri = [rest of URI], a = [hash, ...]
+        o.hash = a.join('#') || undefined; // hash = hash
         
-        // Take the first item and split at @.
-        a = uri.shift().split('@'); // a = [user:pass, www.asdad.com:8080], uri = [segment, ...]
+        // Get the parameters:
+        // 1. Split URI at ?s.
+        // 2. URI is string before first ?.
+        // 3. If there is a string after ?. Split at & and then = to map a params array.
+        a = uri.split('?'); // a = [rest of URI, query, ...]
+        uri = a.shift(); // uri = rest of URI, a = [query, ...]
+        o.params = (a[0]) ? a.join('?').split('&').map(function(v) {
+            v = v.split('=');
+            return {key: v.shift().replace(/^amp;/, ''), value: v.join('=')};
+        }) : undefined;
         
-        // Take the last item and split at colon.
-        b = a.pop().split(colon); // b = [www.asdad.com, 8080], a = [user:pass]
-        a = a.join('@').split(colon); // a = [user, pass]
-        
-        // Get User.
-        o.user = a.shift() || undefined; // user = user, a = [pass]
-        
-        // Get Pass.
-        o.pass = a.join(colon) || undefined; // pass = a = pass
-        
-        // Get Domain.
-        o.domain = b.shift(); // domain = www.asdad.com, b = [8080]
-        
-        // Get Port.
-        o.port = b.join(colon) || undefined; // port = b = 8080
-        
-        // Make URI a string again.
-        uri = slash + uri.join(slash); // uri = path
+        // Check if URI is protocol relative.
+        if (uri.substr(0, 2) === slash + slash) {
+            
+            // Remove the two slashes and split at slashes.
+            uri = (uri.substr(2)).split(slash); // uri = [user:pass@www.asdad.com:8080, segment, ...]
+            
+            // Take the first item and split at @.
+            a = uri.shift().split('@'); // a = [user:pass, www.asdad.com:8080], uri = [segment, ...]
+            
+            // Take the last item and split at colon.
+            b = a.pop().split(colon); // b = [www.asdad.com, 8080], a = [user:pass]
+            a = a.join('@').split(colon); // a = [user, pass]
+            
+            // Get User.
+            o.user = a.shift() || undefined; // user = user, a = [pass]
+            
+            // Get Pass.
+            o.pass = a.join(colon) || undefined; // pass = a = pass
+            
+            // Get Host.
+            o.host = b.shift(); // host = www.asdad.com, b = [8080]
+            
+            // Get Port.
+            o.port = b.join(colon) || undefined; // port = b = 8080
+            
+            // Make URI a string again.
+            uri = slash + uri.join(slash); // uri = path
+        }
     }
     
     // Get Path.
@@ -79,27 +82,10 @@ URI.parse = function(uri, undefined) {
     // Return Object.
     return o;
 };
-/* Opted for the below code for clarity, there is only 3 characters difference * /
+
 URI.stringify = function(o) {
     var uri = (o.scheme) ? o.scheme + ':' : '';
-    uri += (o.domain) ? '//' : '';
-    uri += (o.user) ? o.user + ((o.pass) ? ':' + o.pass : '') + '@' : '';
-    uri += o.domain || '';
-    uri += (o.port) ? ':' + o.port : '';
-    uri += o.path || '';
-    uri += (o.params) ? '?' + o.params.map(function(v) {
-        return (v.key) ? v.key + ((v.value) ? '=' + v.value : '') : '';
-    }).join('&') : '';
-    uri+=(o.hash)?'#'+o.hash:'';
-    return uri;
-};
-/**/
-URI.stringify = function(o) {
-    var uri = '';
-    if (o.scheme) {
-        uri += o.scheme + ':';
-    }
-    if (o.domain) {
+    if (o.host) {
         uri += '//';
     }
     if (o.user) {
@@ -109,7 +95,7 @@ URI.stringify = function(o) {
         }
         uri += '@';
     }
-    uri += o.domain || '';
+    uri += o.host || '';
     if (o.port) {
         uri += ':' + o.port;
     }
