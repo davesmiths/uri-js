@@ -1,4 +1,4 @@
-// URI.js 1
+// URI.js 14
 // http://github.com/davesmith/
 var URI = {};
 URI.parse = function(uri, undefined) {
@@ -15,7 +15,7 @@ URI.parse = function(uri, undefined) {
     
     // Get the scheme:
     // 1. Checks if there is a colon present.
-    // 2. If present, checks if a slash is not present or if one does whether the colon appears before the first slash.
+    // 2. If present, checks if a slash is absent or if a slash is present whether the colon appears before the first slash.
     // 3. Split URI at colons.
     // 4. Scheme is string before the first colon.
     // 5. URI is string after the first colon.
@@ -25,26 +25,30 @@ URI.parse = function(uri, undefined) {
         uri = uri.join(colon); // uri = rest of URI
     }
     
-    if ('http,https,ftp'.split(o.scheme, 2)[1]) {
+    if (o.scheme === undefined || 'http,https,ftp'.split(o.scheme, 2)[1]) {
         
         // Get the hash:
         // 1. Split URI at #s.
         // 2. URI is string before the first #.
         // 3. Hash is string after the first #.
-        a = uri.split('#'); // a = [rest of URI, hash, ...]
-        uri = a.shift(); // uri = [rest of URI], a = [hash, ...]
-        o.hash = a.join('#') || undefined; // hash = hash
+        if (uri.indexOf('#') !== -1) {
+            a = uri.split('#'); // a = [rest of URI, hash, ...]
+            uri = a.shift(); // uri = [rest of URI], a = [hash, ...]
+            o.hash = a.join('#') || '';
+        }
         
         // Get the parameters:
         // 1. Split URI at ?s.
         // 2. URI is string before first ?.
         // 3. If there is a string after ?. Split at & and then = to map a params array.
-        a = uri.split('?'); // a = [rest of URI, query, ...]
-        uri = a.shift(); // uri = rest of URI, a = [query, ...]
-        o.params = (a[0]) ? a.join('?').split('&').map(function(v) {
-            v = v.split('=');
-            return {key: v.shift().replace(/^amp;/, ''), value: v.join('=')};
-        }) : undefined;
+        if (uri.indexOf('?') !== -1) {
+            a = uri.split('?'); // a = [rest of URI, query, ...]
+            uri = a.shift(); // uri = rest of URI, a = [query, ...]
+            o.params = a.join('?').split('&').map(function(v) {
+                v = v.split('=');
+                return {key: v.shift().replace(/^amp;/, ''), value: v.join('=')};
+            });
+        }
         
         // Check if URI is protocol relative.
         if (uri.substr(0, 2) === slash + slash) {
@@ -83,7 +87,7 @@ URI.parse = function(uri, undefined) {
     return o;
 };
 
-URI.stringify = function(o) {
+URI.stringify = function(o, undefined) {
     var uri = (o.scheme) ? o.scheme + ':' : '';
     if (o.host) {
         uri += '//';
@@ -105,7 +109,7 @@ URI.stringify = function(o) {
             return (v.key) ? v.key + ((v.value) ? '=' + v.value : '') : '';
         }).join('&');
     }
-    if (o.hash) {
+    if (o.hash !== undefined) {
         uri += '#' + o.hash;
     }
     return uri;
