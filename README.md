@@ -51,7 +51,8 @@ and URI.parse('path/to/file.html?marmite=lemoncurd#yum
 URI.stringify
 -------------
 
-By example: 
+By example:
+
 ``` js
 var o = {
     "hash": "yum",
