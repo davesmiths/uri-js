@@ -1,7 +1,13 @@
-// URI.js 14
+// URI.js 15
+// Creates a URI object with functions URI.parse and URI.stringify
 // http://github.com/davesmith/
-var URI = {};
-URI.parse = function(uri, undefined) {
+// By Dave Smith: http://www.dave-smith.info/
+
+// Use URI if it exists or create the URI object.
+var URI = URI || {};
+
+// Use URI.parse if it exists or create URI.parse.
+URI.parse = URI.parse || function(uri, undefined) {
     
     // Create o, the object to return.
     var o = {source: uri}, // Return the source URI.
@@ -87,7 +93,8 @@ URI.parse = function(uri, undefined) {
     return o;
 };
 
-URI.stringify = function(o, undefined) {
+// Use URI.stringify if it exists or create URI.stringify.
+URI.stringify = URI.stringify || function(o, undefined) {
     var uri = (o.scheme) ? o.scheme + ':' : '';
     if (o.host) {
         uri += '//';
