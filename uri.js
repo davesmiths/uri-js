@@ -1,9 +1,9 @@
-// URI.js 10
+// URI.js 11
 // http://github.com/davesmith/
 var URI = {};
 URI.parse = function(uri, undefined) {
-    var i, o = {source: uri};
-
+    var o = {source: uri};
+    
     o.hash = uri.replace(/^\s+|\s+$/g, '').split('#');
     uri = o.hash.shift();
     o.hash = o.hash.join('#') || undefined;
@@ -20,12 +20,13 @@ URI.parse = function(uri, undefined) {
     // path//, /path//, //www.esas.com/path// http://asdasd.com//
     uri = uri.split('://');
     if (uri.length > 1) {
-        o.protocol = uri.shift() || undefined;
+        o.scheme = uri.shift() || undefined;
         uri = '//' + uri.join('://');
     }
     else {
         uri = uri.join('://');
     }
+    
     // path//, /path//,  //asdasd.com//path
     if (uri.charAt(0) === '/' && uri.charAt(1) === '/') { // Protocol relative
         uri = (uri.substr(2)).split('/'); // uri = [asdad.com, path]
@@ -47,7 +48,7 @@ URI.parse = function(uri, undefined) {
 };
 
 URI.stringify = function(o) {
-    var uri = (o.protocol) ? o.protocol + ':' : '';
+    var uri = (o.scheme) ? o.scheme + ':' : '';
     uri += (o.domain) ? '//' : '';
     uri += (o.user) ? (o.user || '') + ((o.password) ? ':' + o.password : '') + '@' : '';
     uri += o.domain || '';
