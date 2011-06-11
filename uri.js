@@ -1,12 +1,11 @@
-// URI.js 9
+// URI.js 10
 // http://github.com/davesmith/
 var URI = {};
 URI.parse = function(uri, undefined) {
-    var i,len,a,b,
-    o = {source: uri};
+    var i, o = {source: uri};
 
     o.hash = uri.replace(/^\s+|\s+$/g, '').split('#');
-    uri = o.hash.shift();    
+    uri = o.hash.shift();
     o.hash = o.hash.join('#') || undefined;
         
     o.query = uri.split('?');
@@ -43,19 +42,14 @@ URI.parse = function(uri, undefined) {
         
         uri = '/' + uri.join('/');
     }
-    o.path = uri;
-    
+    o.path = uri || undefined;
     return o;
 };
 
 URI.stringify = function(o) {
     var uri = (o.protocol) ? o.protocol + ':' : '';
     uri += (o.domain) ? '//' : '';
-    if (o.user) {
-        uri += o.user || '';
-        uri += (o.password) ? ':' + o.password : '';
-        uri += '@';
-    }
+    uri += (o.user) ? (o.user || '') + ((o.password) ? ':' + o.password : '') + '@' : '';
     uri += o.domain || '';
     uri += (o.port) ? ':' + o.port : '';
     uri += o.path || '';
