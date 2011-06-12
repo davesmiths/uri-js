@@ -61,4 +61,18 @@ var o = {
 var output = URI.stringify(o); // output = "path/to/file.html#yum"
 ```
 
+__Detail__
+
+URI.js defaults to the URI Generic Syntax that we're all familiar with, 
+like http://blah.. or ../path/file.html etc. Schemes that are not
+http, https or ftp are handled as follows, by example: mailto:frank.drebin@policesquad.com 
+returns
+
+``` js
+{
+    "source": "mailto:frank.drebin@policesquad.com",
+    "scheme": "mailto",
+    "path": "frank.drebin@policesquad.com"
+}
+```
 
