@@ -33,7 +33,7 @@ By example: URI.parse('http://user:pass@www.example.com:8080/path/to/file.html?i
 }
 ```
 
-and URI.parse('path/to/file.html?marmite=lemoncurd#yum
+and URI.parse('path/to/file.html?marmite=lemoncurd#yum returns
 
 ``` js
 {
@@ -58,7 +58,7 @@ var o = {
     "hash": "yum",
     "path": "path/to/file.html"
 }
-var output = URI.stringify(o); // Gives "path/to/file.html#yum"
+var output = URI.stringify(o); // output = "path/to/file.html#yum"
 ```
 
 
