@@ -4,10 +4,9 @@ Adds URI.parse(uriString) and URI.stringify(uriObject) to JavaScript for convert
 
 __Status: Ready, I think :P__
 
-URI.js uses some JavaScript 1.6 features, which may not be native to some older browsers. Preferably I'd like to keep it this way and use a patch for older browsers.
+URI.js uses some yummy JavaScript 1.6 features, which may not be native to older browsers. Preferably I'd like to keep it tasty and use a patch for the oldies.
 
-One such patch could be http://www.dustindiaz.com/sugar-arrays/
-
+One such patch could be: http://www.dustindiaz.com/sugar-arrays/
 
 __URI.parse__
 
