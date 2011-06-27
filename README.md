@@ -1,6 +1,6 @@
 URI.js
 ------
-Adds URI.parse(uriString) and URI.stringify(uriObject) to JavaScript for converting a URI string to a URI object and vice-versa.
+Adds URI.parse and URI.stringify to JavaScript. Use URI.parse to parse a URI string and return a URI object. Use URI.stringify to unparse a URI object and return a URI string.
 
 __Status: Ready, I think :P__
 
