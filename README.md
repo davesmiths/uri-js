@@ -5,7 +5,7 @@ Adds URI.parse and URI.stringify to JavaScript. Use URI.parse to parse a URI str
 __Status: Ready, I think :P__
 
 URI.js makes use of Array.map a yummy JavaScript 1.6 feature, which is not native in all browsers.
-One way to patch this is with Mozilla's Array.map polyfill: https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/array/map
+One way to patch this is with Mozilla's Array.map polyfill: https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/array/map (the code in the Compatibility section)
 
 
 __URI.parse__
