@@ -1,4 +1,4 @@
-// URI.js  15
+// URI.js  16
 // Creates a URI object with functions URI.parse and URI.stringify
 // http://github.com/davesmith/
 // By Dave Smith: http://www.dave-smith.info/
@@ -10,7 +10,7 @@ var URI = URI || {};
 URI.parse = URI.parse || function(uri, undefined) {
     
     // Create o, the object to return.
-    var o = {source: uri}, // Return the source URI.
+    var o = {readonly: {source: uri, params: []}, params: {}}, // Return the source URI.
         colon = ':', // Save a few chars by defining colon.
         slash = '/', // Save a few chars by defining slash.
         a = uri.indexOf(colon), // a = index of the first colon to help get the scheme. a is reused later as a temporary store.
@@ -50,9 +50,13 @@ URI.parse = URI.parse || function(uri, undefined) {
         if (uri.indexOf('?') !== -1) {
             a = uri.split('?'); // a = [rest of URI, query, ...]
             uri = a.shift(); // uri = rest of URI, a = [query, ...]
-            o.params = a.join('?').split('&').map(function(v) {
+            a = a.join('?').split('&');
+            o.readonly.params = a.map(function(v, k) {
                 v = v.split('=');
-                return {key: v.shift().replace(/^amp;/, ''), value: v.join('=')};
+                k = v.shift().replace(/^amp;/, '');
+                v = v.join('=');
+                o.params[k] = v;
+                return {key: k, value: v};
             });
         }
         
@@ -95,7 +99,7 @@ URI.parse = URI.parse || function(uri, undefined) {
 
 // Use URI.stringify if it exists or create URI.stringify.
 URI.stringify = URI.stringify || function(o, undefined) {
-    var uri = (o.scheme) ? o.scheme + ':' : '';
+    var uri = (o.scheme) ? o.scheme + ':' : '', params = '';
     if (o.host) {
         uri += '//';
     }
@@ -112,9 +116,14 @@ URI.stringify = URI.stringify || function(o, undefined) {
     }
     uri += o.path || '';
     if (o.params) {
-        uri += '?' + o.params.map(function(v) {
-            return (v.key) ? v.key + ((v.value) ? '=' + v.value : '') : '';
-        }).join('&');
+        for (var i in o.params) {
+            if (o.params.hasOwnProperty(i)) {
+                params += i + ((o.params[i]) ? '=' + o.params[i] : '') + '&';
+            }
+        }
+        if (params) {
+            uri += '?' + params.slice(0, -1);
+        }
     }
     if (o.hash !== undefined) {
         uri += '#' + o.hash;
