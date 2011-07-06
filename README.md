@@ -4,6 +4,8 @@ URI.js is a JavaScript URI parser. It has two functions URI.parse and URI.string
 
 Use URI.parse to parse a URI string and return a URI object. Use URI.stringify to unparse a URI object and return a URI string.
 
+1 KB minified, 607 bytes gzipped.
+
 __Status: Ready, I think :P__
 
 URI.js makes use of Array.map a yummy JavaScript 1.6 feature, which is not native in all browsers.
