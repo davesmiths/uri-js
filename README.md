@@ -16,19 +16,29 @@ By example: URI.parse('http://user:pass@www.example.com:8080/path/to/file.html?i
 
 ``` js
 {
-    "source": "http://user:pass@www.example.com:8080/path/to/file.html?ice=cream&cheese=toast#hash",
+    "readonly" {
+        "source": "http://user:pass@www.example.com:8080/path/to/file.html?ice=beam&cheese=toast&ice=cream#hash",
+        "params": [
+            {
+                "key": "ice",
+                "value": "beam"
+            },
+            {
+                "key": "cheese",
+                "value": "toast"
+            },
+            {
+                "key": "ice",
+                "value": "cream"
+            }
+        ]
+    },
     "scheme": "http",
     "hash": "hash",
-    "params": [
-        {
-            "key": "ice",
-            "value": "cream"
-        },
-        {
-            "key": "cheese",
-            "value": "toast"
-        }
-    ],
+    "params": {
+        "ice": "cream",
+        "cheese": "toast"
+    },
     "user": "user",
     "pass": "pass",
     "host": "www.example.com",
@@ -41,14 +51,19 @@ and URI.parse('path/to/file.html?marmite=lemoncurd#yum returns
 
 ``` js
 {
-    "source": "path/to/file.html?marmite=lemoncurd#yum",
+    "readonly" {
+        "source": "path/to/file.html?marmite=lemoncurd#yum",
+        "params": [
+            {
+                "key": "marmite",
+                "value": "lemoncurd"
+            }
+        ]
+    },
+    "params": {
+        "marmite": "lemoncurd"
+    },
     "hash": "yum",
-    "params": [
-        {
-            "key": "marmite",
-            "value": "lemoncurd"
-        }
-    ],
     "path": "path/to/file.html"
 }
 ```
@@ -74,7 +89,9 @@ returns
 
 ``` js
 {
-    "source": "mailto:frank.drebin@policesquad.com",
+    "readonly" {
+        "source": "mailto:frank.drebin@policesquad.com"
+    },
     "scheme": "mailto",
     "path": "frank.drebin@policesquad.com"
 }
