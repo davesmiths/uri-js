@@ -6,7 +6,7 @@ Use URI.parse to parse a URI string and return a URI object. Use URI.stringify t
 
 1 KB minified, 607 bytes gzipped.
 
-__Status: Ready, I think :P__
+__Status: Ready__
 
 URI.js makes use of Array.map a yummy JavaScript 1.6 feature, which is not native in all browsers.
 One way to patch this is with Mozilla's Array.map polyfill: https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/array/map (the code in the Compatibility section)
