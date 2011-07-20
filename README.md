@@ -1,6 +1,6 @@
 URI.js
 ------
-URI.js is a JavaScript URI parser. It has two functions URI.parse and URI.stringify.
+__URI.js is a JavaScript URI parser. It has two functions URI.parse and URI.stringify__
 
 Use URI.parse to parse a URI string and return a URI object. Use URI.stringify to unparse a URI object and return a URI string.
 
