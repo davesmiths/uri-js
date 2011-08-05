@@ -1,4 +1,4 @@
-// URI.js  16
+// URI.js  17
 // Creates a URI object with functions URI.parse and URI.stringify
 // http://github.com/davesmith/
 // By Dave Smith: http://www.dave-smith.info/
@@ -15,6 +15,7 @@ URI.parse = URI.parse || function(uri, undefined) {
         slash = '/', // Save a few chars by defining slash.
         a = uri.indexOf(colon), // a = index of the first colon to help get the scheme. a is reused later as a temporary store.
         b = uri.indexOf(slash); // b = index of the first slash to help get the scheme.
+        c = uri.indexOf('?'); // c = index of the first question mark to help get the scheme.
     
     // Remove white space.
     uri = uri.replace(/^\s+|\s+$/g, '');
@@ -22,10 +23,11 @@ URI.parse = URI.parse || function(uri, undefined) {
     // Get the scheme:
     // 1. Checks if there is a colon present.
     // 2. If present, checks if a slash is absent or if a slash is present whether the colon appears before the first slash.
+    // 3. and checks if a question mark is absent or if a question mark is present whether the colon appears before the first question mark.
     // 3. Split URI at colons.
     // 4. Scheme is string before the first colon.
     // 5. URI is string after the first colon.
-    if (a !== -1 && (b === -1 || a < b)) {
+    if (a !== -1 && (b === -1 || a < b) && (c === -1 || a < c)) {
         uri = uri.split(colon); // uri = [scheme, rest of URI, ...]
         o.scheme = uri.shift(); // scheme = scheme, uri = [rest of URI, ...]
         uri = uri.join(colon); // uri = rest of URI
@@ -47,7 +49,7 @@ URI.parse = URI.parse || function(uri, undefined) {
         // 1. Split URI at ?s.
         // 2. URI is string before first ?.
         // 3. If there is a string after ?. Split at & and then = to map a params array.
-        if (uri.indexOf('?') !== -1) {
+        if (c !== -1) {
             a = uri.split('?'); // a = [rest of URI, query, ...]
             uri = a.shift(); // uri = rest of URI, a = [query, ...]
             a = a.join('?').split('&');
