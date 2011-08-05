@@ -1,10 +1,12 @@
 URI.js
 ------
-URI.js is a JavaScript URI parser. It has two functions URI.parse and URI.stringify.
+__URI.js is a JavaScript URI parser. It has two functions URI.parse and URI.stringify__
 
 Use URI.parse to parse a URI string and return a URI object. Use URI.stringify to unparse a URI object and return a URI string.
 
-__Status: Ready, I think :P__
+1 KB minified, 607 bytes gzipped.
+
+__Status: Ready__
 
 URI.js makes use of Array.map a yummy JavaScript 1.6 feature, which is not native in all browsers.
 One way to patch this is with Mozilla's Array.map polyfill: https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/array/map (the code in the Compatibility section)
@@ -16,19 +18,29 @@ By example: URI.parse('http://user:pass@www.example.com:8080/path/to/file.html?i
 
 ``` js
 {
-    "source": "http://user:pass@www.example.com:8080/path/to/file.html?ice=cream&cheese=toast#hash",
+    "readonly" {
+        "source": "http://user:pass@www.example.com:8080/path/to/file.html?ice=beam&cheese=toast&ice=cream#hash",
+        "params": [
+            {
+                "key": "ice",
+                "value": "beam"
+            },
+            {
+                "key": "cheese",
+                "value": "toast"
+            },
+            {
+                "key": "ice",
+                "value": "cream"
+            }
+        ]
+    },
     "scheme": "http",
     "hash": "hash",
-    "params": [
-        {
-            "key": "ice",
-            "value": "cream"
-        },
-        {
-            "key": "cheese",
-            "value": "toast"
-        }
-    ],
+    "params": {
+        "ice": "cream",
+        "cheese": "toast"
+    },
     "user": "user",
     "pass": "pass",
     "host": "www.example.com",
@@ -41,14 +53,19 @@ and URI.parse('path/to/file.html?marmite=lemoncurd#yum returns
 
 ``` js
 {
-    "source": "path/to/file.html?marmite=lemoncurd#yum",
+    "readonly" {
+        "source": "path/to/file.html?marmite=lemoncurd#yum",
+        "params": [
+            {
+                "key": "marmite",
+                "value": "lemoncurd"
+            }
+        ]
+    },
+    "params": {
+        "marmite": "lemoncurd"
+    },
     "hash": "yum",
-    "params": [
-        {
-            "key": "marmite",
-            "value": "lemoncurd"
-        }
-    ],
     "path": "path/to/file.html"
 }
 ```
@@ -74,7 +91,9 @@ returns
 
 ``` js
 {
-    "source": "mailto:frank.drebin@policesquad.com",
+    "readonly" {
+        "source": "mailto:frank.drebin@policesquad.com"
+    },
     "scheme": "mailto",
     "path": "frank.drebin@policesquad.com"
 }
