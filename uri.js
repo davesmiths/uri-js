@@ -14,8 +14,9 @@ URI.parse = URI.parse || function(uri, undefined) {
         colon = ':', // Save a few chars by defining colon.
         slash = '/', // Save a few chars by defining slash.
         a = uri.indexOf(colon), // a = index of the first colon to help get the scheme. a is reused later as a temporary store.
-        b = uri.indexOf(slash); // b = index of the first slash to help get the scheme.
-        c = uri.indexOf('?'); // c = index of the first question mark to help get the scheme.
+        b = uri.indexOf(slash), // b = index of the first slash to help get the scheme.
+        c = uri.indexOf('?'), // c = index of the first question mark to help get the scheme.
+        d = uri.indexOf('#'); // d = index of the first hash mark.
     
     // Remove white space.
     uri = uri.replace(/^\s+|\s+$/g, '');
@@ -39,17 +40,17 @@ URI.parse = URI.parse || function(uri, undefined) {
         // 1. Split URI at #s.
         // 2. URI is string before the first #.
         // 3. Hash is string after the first #.
-        if (uri.indexOf('#') !== -1) {
+        if (d !== -1) {
             a = uri.split('#'); // a = [rest of URI, hash, ...]
             uri = a.shift(); // uri = [rest of URI], a = [hash, ...]
             o.hash = a.join('#') || '';
         }
         
         // Get the parameters:
-        // 1. Split URI at ?s.
+        // 1. Split URI at ?s and only if before the first hash if there is one.
         // 2. URI is string before first ?.
         // 3. If there is a string after ?. Split at & and then = to map a params array.
-        if (c !== -1) {
+        if (c !== -1 && (d === -1 || c < d)) {
             a = uri.split('?'); // a = [rest of URI, query, ...]
             uri = a.shift(); // uri = rest of URI, a = [query, ...]
             a = a.join('?').split('&');
