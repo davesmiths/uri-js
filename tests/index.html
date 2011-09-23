@@ -45,7 +45,7 @@ if (!Date.now) {
 using('//ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.js',
     '//ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js',
     //'http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.1.7/underscore-min.js',
-    'uri.js',
+    '../uri.js',
     //'js-uri-parser.js',
     function() {
         var URI = window['https://github.com/davesmith/uri-js'];
@@ -137,12 +137,8 @@ textarea {width:90%;}
 <span>2 </span><a href="#">       </a>
 <span>3 </span><a href="#">#</a>
 <span>4 </span><a href="#">##</a>
-<span>46 </span><a href="#">##hash</a>
-<span>47 </span><a href="#">#ha#sh</a>
 <span>5 </span><a href="#">#hash</a>
 <span>6 </span><a href="#">?</a>
-<span>33 </span><a href="#">?&</a>
-<span>34 </span><a href="#">?a=&</a>
 <span>7 </span><a href="#">?key</a>
 <span>8 </span><a href="#">?key#hash</a>
 <span>9 </span><a href="#">?key=value</a>
@@ -170,6 +166,8 @@ textarea {width:90%;}
 <span>30 </span><a href="#">https://www.example.com:8080//path</a>
 <span>31 </span><a href="#">https://user@www.example.com//path</a>
 <span>32 </span><a href="#">https://user:pass@www.example.com//path</a>
+<span>33 </span><a href="#">?&</a>
+<span>34 </span><a href="#">?a=&</a>
 <span>35 </span><a href="#">http:/path/to/here/</a>
 <span>36 </span><a href="#">ftp://ftp.is.co.za/rfc/rfc1808.txt</a>
 <span>37 </span><a href="#">http://www.ietf.org/rfc/rfc2396.txt</a>
@@ -181,6 +179,8 @@ textarea {width:90%;}
 <span>43 </span><a href="#">urn:oasis:names:specification:docbook:dtd:xml:4.1.2</a>
 <span>44 </span><a href="#">?urn:oasis:names:specification:docbook:dtd:xml:4.1.2</a>
 <span>45 </span><a href="#">urn:?oasis:names:specification:docbook:dtd:xml:4.1.2</a>
+<span>46 </span><a href="#">##hash</a>
+<span>47 </span><a href="#">#ha#sh</a>
 </pre>
 <h2>Rough Performance Test</h2>
 <p>The test goes through the list of URI test cases 1000 times and displays the time taken in milliseconds.</p>
