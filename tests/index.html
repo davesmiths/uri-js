@@ -44,9 +44,11 @@ if (!Date.now) {
 
 using('//ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.js',
     '//ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js',
+    //'http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.1.7/underscore-min.js',
     'uri.js',
     //'js-uri-parser.js',
     function() {
+        var URI = window['https://github.com/davesmith/uri-js'];
         $(function() {
             $('form.parse').bind('submit', function() {
                 var $this = $(this);
