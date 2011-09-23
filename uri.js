@@ -4,7 +4,7 @@
 // By Dave Smith: http://www.dave-smith.info/
 
 // URL-spaced to prevent conflits with other code.
-window['github.com/davesmith/uri-js'] = {
+window['https://github.com/davesmith/uri-js'] = {
 
     // Use URI.parse if it exists or create URI.parse.
     parse: function(uri, undefined) {
