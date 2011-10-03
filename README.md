@@ -54,7 +54,7 @@ and URI.parse('path/to/file.html?marmite=lemoncurd#yum returns
 
 ``` js
 {
-    "readonly" {
+    "readonly": {
         "source": "path/to/file.html?marmite=lemoncurd#yum",
         "params": [
             {
@@ -92,7 +92,7 @@ returns
 
 ``` js
 {
-    "readonly" {
+    "readonly": {
         "source": "mailto:frank.drebin@policesquad.com"
     },
     "scheme": "mailto",
