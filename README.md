@@ -11,6 +11,7 @@ __Status: Ready__
 URI.js makes use of Array.map a JavaScript 1.6 feature, which is not native in all browsers.
 One way to patch this is with Mozilla's Array.map polyfill: https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/array/map (the code in the Compatibility section)
 
+The test page is live here: http://www.dave-smith.info/uri-js/tests/
 
 __URI.parse__
 
