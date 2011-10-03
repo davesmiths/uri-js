@@ -15,7 +15,7 @@ The test page is live here: http://www.dave-smith.info/uri-js/tests/
 
 __URI.parse__
 
-By example: URI.parse('http://user:pass@www.example.com:8080/path/to/file.html?ice=beam&cheese=toast&ice=cream#hash') returns:
+For example: URI.parse('http://user:pass@www.example.com:8080/path/to/file.html?ice=beam&cheese=toast&ice=cream#hash') returns:
 
 ``` js
 {
@@ -50,7 +50,7 @@ By example: URI.parse('http://user:pass@www.example.com:8080/path/to/file.html?i
 }
 ```
 
-and URI.parse('path/to/file.html?marmite=lemoncurd#yum returns
+and URI.parse('path/to/file.html?marmite=lemoncurd#yum') returns
 
 ``` js
 {
@@ -73,7 +73,7 @@ and URI.parse('path/to/file.html?marmite=lemoncurd#yum returns
 
 __URI.stringify__
 
-By example:
+For example:
 
 ``` js
 var o = {
