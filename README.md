@@ -8,13 +8,13 @@ Use URI.parse to parse a URI string and return a URI object. Use URI.stringify t
 
 __Status: Ready__
 
-URI.js makes use of Array.map a yummy JavaScript 1.6 feature, which is not native in all browsers.
+URI.js makes use of Array.map a JavaScript 1.6 feature, which is not native in all browsers.
 One way to patch this is with Mozilla's Array.map polyfill: https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/array/map (the code in the Compatibility section)
 
 
 __URI.parse__
 
-By example: URI.parse('http://user:pass@www.example.com:8080/path/to/file.html?ice=cream&cheese=toast#hash') returns:
+By example: URI.parse('http://user:pass@www.example.com:8080/path/to/file.html?ice=beam&cheese=toast&ice=cream#hash') returns:
 
 ``` js
 {
