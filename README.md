@@ -19,7 +19,7 @@ By example: URI.parse('http://user:pass@www.example.com:8080/path/to/file.html?i
 
 ``` js
 {
-    "readonly" {
+    "readonly": {
         "source": "http://user:pass@www.example.com:8080/path/to/file.html?ice=beam&cheese=toast&ice=cream#hash",
         "params": [
             {
