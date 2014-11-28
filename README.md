@@ -1,24 +1,33 @@
-URI.js
-------
-__URI.js is a JavaScript URI parser. It has two functions URI.parse and URI.stringify__
+uri.js
+===
+__A URI/URL parser with two functions uri.parse and uri.stringify__
 
-Use URI.parse to parse a URI string and return a URI object. Use URI.stringify to unparse a URI object and return a URI string.
+Demo
+---
+http://www.dave-smith.info/uri-js/demo/
 
-1 KB minified, 607 bytes gzipped.
+uri.parse
+---
 
-__Status: Ready__
-
-URI.js makes use of Array.map a JavaScript 1.6 feature, which is not native in all browsers.
-One way to patch this is with Mozilla's Array.map polyfill: https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/array/map (the code in the Compatibility section)
-
-The test page is live here: http://www.dave-smith.info/uri-js/tests/
-
-__URI.parse__
-
-For example: URI.parse('http://user:pass@www.example.com:8080/path/to/file.html?ice=beam&cheese=toast&ice=cream#hash') returns:
+__Parses a string and returns a object__
 
 ``` js
-{
+uriJS = window['github.com/davesmiths/uri-js'],
+
+output = uriJS.parse('http://user:pass@www.example.com:8080/path/to/file.html?ice=beam&cheese=toast&ice=cream#hash');
+
+output === {
+    "scheme": "http",
+    "user": "user",
+    "pass": "pass",
+    "host": "www.example.com",
+    "port": "8080",
+    "path": "/path/to/file.html",
+    "params": {
+        "ice": "cream",
+        "cheese": "toast"
+    },
+    "hash": "hash",
     "readonly": {
         "source": "http://user:pass@www.example.com:8080/path/to/file.html?ice=beam&cheese=toast&ice=cream#hash",
         "params": [
@@ -35,25 +44,20 @@ For example: URI.parse('http://user:pass@www.example.com:8080/path/to/file.html?
                 "value": "cream"
             }
         ]
-    },
-    "scheme": "http",
-    "hash": "hash",
-    "params": {
-        "ice": "cream",
-        "cheese": "toast"
-    },
-    "user": "user",
-    "pass": "pass",
-    "host": "www.example.com",
-    "port": "8080",
-    "path": "/path/to/file.html"
+    }
 }
 ```
 
-and URI.parse('path/to/file.html?marmite=lemoncurd#yum') returns
+and
 
 ``` js
-{
+output = uriJS.parse('path/to/file.html?marmite=lemoncurd#yum');
+output === {
+    "path": "path/to/file.html",
+    "params": {
+        "marmite": "lemoncurd"
+    },
+    "hash": "yum",
     "readonly": {
         "source": "path/to/file.html?marmite=lemoncurd#yum",
         "params": [
@@ -62,41 +66,38 @@ and URI.parse('path/to/file.html?marmite=lemoncurd#yum') returns
                 "value": "lemoncurd"
             }
         ]
-    },
-    "params": {
-        "marmite": "lemoncurd"
-    },
-    "hash": "yum",
-    "path": "path/to/file.html"
+    }
 }
 ```
 
-__URI.stringify__
-
-For example:
+uri.stringify
+---
+__Takes an object and returns a URI string__
 
 ``` js
-var o = {
-    "hash": "yum",
-    "path": "path/to/file.html"
-}
-var output = URI.stringify(o); // output = "path/to/file.html#yum"
+output = uriJS.stringify({
+    "path": "path/to/file.html",
+    "hash": "yum"
+});
+output === "path/to/file.html#yum";
 ```
 
-__Detail__
+Detail
+---
 
-URI.js defaults to the URI Generic Syntax that we're all familiar with, 
-like http://blah.. or ../path/file.html etc. Schemes that are not
-http, https or ftp are handled as follows, by example: mailto:frank.drebin@policesquad.com 
-returns
+uri.js defaults to the [URI Generic Syntax](http://en.wikipedia.org/wiki/URI_scheme#Generic_syntax) we're all familiar with: http(s)://, ftp://, .../path/file.html?query#hash. Schemes outside this are handled as follows:
 
 ``` js
-{
+output = uriJS.parse('mailto:frank.drebin@policesquad.com');
+output === {
+    "scheme": "mailto",
+    "path": "frank.drebin@policesquad.com",
     "readonly": {
         "source": "mailto:frank.drebin@policesquad.com"
-    },
-    "scheme": "mailto",
-    "path": "frank.drebin@policesquad.com"
+    }
 }
 ```
 
+Browser Compatibility
+---
+To support IE 8 and less a [polyfill for Array.map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map#Polyfill) will be needed. Array.map is otherwise [well supported](http://kangax.github.io/compat-table/es5/#Array.prototype.map).
