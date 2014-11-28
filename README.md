@@ -4,7 +4,7 @@ __A URI/URL parser with two functions uri.parse and uri.stringify__
 
 Demo
 ---
-http://www.dave-smith.info/uri-js/demo/
+http://www.dave-smith.info/GitHub/uri-js/demo/
 
 uri.parse
 ---
