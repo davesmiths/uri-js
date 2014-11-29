@@ -6,7 +6,7 @@ Demo
 ---
 http://www.dave-smith.info/GitHub/uri-js/demo/
 
-uri.parse
+parse
 ---
 
 __Parses a string and returns a object__
@@ -70,7 +70,7 @@ output === {
 }
 ```
 
-uri.stringify
+stringify
 ---
 __Takes an object and returns a URI string__
 
@@ -82,10 +82,10 @@ output = uriJS.stringify({
 output === "path/to/file.html#yum";
 ```
 
-Detail
+Other schemes
 ---
 
-uri.js defaults to the [URI Generic Syntax](http://en.wikipedia.org/wiki/URI_scheme#Generic_syntax) we're all familiar with: http(s)://, ftp://, .../path/file.html?query#hash. Schemes outside this are handled as follows:
+uri.js defaults to using the [URI Generic Syntax](http://en.wikipedia.org/wiki/URI_scheme#Generic_syntax) we're all familiar with: http(s)://, ftp://, .../path/file.html?query#hash. Schemes outside this are handled as follows:
 
 ``` js
 output = uriJS.parse('mailto:frank.drebin@policesquad.com');
