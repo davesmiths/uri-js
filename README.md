@@ -1,6 +1,6 @@
 uri.js
 ===
-__A URI/URL parser with two functions uri.parse and uri.stringify__
+__A URI/URL parser with two functions parse and stringify__
 
 Demo
 ---
