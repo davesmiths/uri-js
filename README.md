@@ -70,6 +70,9 @@ output = uriJS.parse('path/to/file.html?marmite=lemoncurd#yum');
 //     }
 // }
 
+// Common use of parse
+output = uriJS.parse(window.location.href);
+
 ```
 
 stringify
