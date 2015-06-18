@@ -1,9 +1,9 @@
 // URI.js  18
 // Creates a URI object with functions URI.parse and URI.stringify
-// http://github.com/davesmith/
+// http://github.com/davesmiths/
 
 // URL-spaced to prevent conflits with other code.
-window['github.com/davesmith/uri-js'] = {
+window['github.com/davesmiths/uri-js'] = {
 
     // Use URI.parse if it exists or create URI.parse.
     parse: function(uri, undefined) {
