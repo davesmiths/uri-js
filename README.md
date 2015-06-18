@@ -12,62 +12,64 @@ parse
 __Parses a string and returns a object__
 
 ``` js
-uriJS = window['github.com/davesmiths/uri-js'],
+// Include uri.js before the following
 
-output = uriJS.parse('http://user:pass@www.example.com:8080/path/to/file.html?ice=beam&cheese=toast&ice=cream#hash');
+var uriJS = window['github.com/davesmiths/uri-js'];
 
-output === {
-    "scheme": "http",
-    "user": "user",
-    "pass": "pass",
-    "host": "www.example.com",
-    "port": "8080",
-    "path": "/path/to/file.html",
-    "params": {
-        "ice": "cream",
-        "cheese": "toast"
-    },
-    "hash": "hash",
-    "readonly": {
-        "source": "http://user:pass@www.example.com:8080/path/to/file.html?ice=beam&cheese=toast&ice=cream#hash",
-        "params": [
-            {
-                "key": "ice",
-                "value": "beam"
-            },
-            {
-                "key": "cheese",
-                "value": "toast"
-            },
-            {
-                "key": "ice",
-                "value": "cream"
-            }
-        ]
-    }
-}
-```
+var output = uriJS.parse('http://user:pass@www.example.com:8080/path/to/file.html?ice=beam&cheese=toast&ice=cream#hash');
 
-and
+// output is
+// {
+//    "scheme": "http",
+//    "user": "user",
+//    "pass": "pass",
+//    "host": "www.example.com",
+//    "port": "8080",
+//    "path": "/path/to/file.html",
+//    "params": {
+//        "ice": "cream",
+//        "cheese": "toast"
+//    },
+//    "hash": "hash",
+//    "readonly": {
+//        "source": "http://user:pass@www.example.com:8080/path/to/file.html?ice=beam&cheese=toast&ice=cream#hash",
+//         "params": [
+//             {
+//                 "key": "ice",
+//                 "value": "beam"
+//             },
+//             {
+//                 "key": "cheese",
+//                 "value": "toast"
+//             },
+//             {
+//                 "key": "ice",
+//                 "value": "cream"
+//             }
+//         ]
+//     }
+// }
 
-``` js
 output = uriJS.parse('path/to/file.html?marmite=lemoncurd#yum');
-output === {
-    "path": "path/to/file.html",
-    "params": {
-        "marmite": "lemoncurd"
-    },
-    "hash": "yum",
-    "readonly": {
-        "source": "path/to/file.html?marmite=lemoncurd#yum",
-        "params": [
-            {
-                "key": "marmite",
-                "value": "lemoncurd"
-            }
-        ]
-    }
-}
+
+// output is
+// {
+//     "path": "path/to/file.html",
+//     "params": {
+//         "marmite": "lemoncurd"
+//     },
+//     "hash": "yum",
+//     "readonly": {
+//         "source": "path/to/file.html?marmite=lemoncurd#yum",
+//         "params": [
+//             {
+//                 "key": "marmite",
+//                 "value": "lemoncurd"
+//             }
+//         ]
+//     }
+// }
+
 ```
 
 stringify
@@ -79,7 +81,7 @@ output = uriJS.stringify({
     "path": "path/to/file.html",
     "hash": "yum"
 });
-output === "path/to/file.html#yum";
+// output is "path/to/file.html#yum";
 ```
 
 Other schemes
@@ -89,13 +91,15 @@ uri.js defaults to using the [URI Generic Syntax](http://en.wikipedia.org/wiki/U
 
 ``` js
 output = uriJS.parse('mailto:frank.drebin@policesquad.com');
-output === {
-    "scheme": "mailto",
-    "path": "frank.drebin@policesquad.com",
-    "readonly": {
-        "source": "mailto:frank.drebin@policesquad.com"
-    }
-}
+
+// output is
+// {
+//     "scheme": "mailto",
+//     "path": "frank.drebin@policesquad.com",
+//     "readonly": {
+//         "source": "mailto:frank.drebin@policesquad.com"
+//     }
+// }
 ```
 
 Browser Compatibility
