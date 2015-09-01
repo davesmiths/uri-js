@@ -9,7 +9,7 @@ http://www.dave-smith.info/GitHub/uri-js/demo/
 parse
 ---
 
-__Parses a string and returns a object__
+__Parse a URL string and return an object__
 
 ``` js
 // Include uri.js before the following
@@ -77,7 +77,7 @@ output = uriJS.parse(window.location.href);
 
 stringify
 ---
-__Takes an object and returns a URI string__
+__Take an object and return a URI string__
 
 ``` js
 output = uriJS.stringify({
