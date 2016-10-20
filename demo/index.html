@@ -113,10 +113,10 @@ if (!Date.now) {
 using('//ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.js',
     '//ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js',
     //'http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.1.7/underscore-min.js',
-    '../uri.js',
+    '../uri.src.js',
     //'js-uri-parser.js',
     function() {
-        var urijs = window['github.com/davesmith/uri-js'];
+        var urijs = window['github.com/davesmiths/uri-js'];
         $(function() {
             $('form.parse').bind('submit', function() {
                 var $this = $(this);
@@ -178,25 +178,26 @@ using('//ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.js',
 </style>
 
 <style>
-body {font-size:120%;}
+body {font-size:120%;padding:40px;}
 input {font-size:90%;}
 input[type=text],
 textarea {width:90%;font-size:100%;}
 .col-1 {}
-.col-1 .inn {margin-right:18px;}
+.col-1 .inn {padding-right:18px;}
+.output {position:sticky;top:10px;}
 </style>
 </head>
 <body>
 <div class="row">
-<div class="col w1o2 p1o1">
+<div class="col col-1 w1o2" style="position:sticky;top:0;">
 <div class="inn">
-<h1>uri.js</h1>
-<form class="parse"><p><label for="uri">Try a URI:</label><br /><input id="uri" type="text" /><br /><input type="submit" value="Give me the ice-cream!" /></p></form>
-<form class="stringify"><p><label for="object">Try an Object:</label><br /><textarea rows="14" id="object"></textarea><br /><input type="submit" value="Give me the banana!" /></p></form>
-<p><em>Please note that this file may need uploading in order to work properly.</em></p>
+    <h1>uri.js</h1>
+        <form class="parse"><p><label for="uri">Try a URI:</label><br /><input id="uri" type="text" /><br /><input type="submit" value="Give me the ice-cream!" /></p></form>
+        <form class="stringify"><p><label for="object">Try an Object:</label><br /><textarea rows="14" id="object"></textarea><br /><input type="submit" value="Give me the banana!" /></p></form>
+        <p><em>Please note that this file may need uploading in order to work properly.</em></p>
 </div>
 </div>
-<div class="col w1o2 p2o2">
+<div class="col w1o2">
 <div class="inn">
 <h2>URI Test Cases</h2>
 <p>On page load each URI is parsed, stringified and the result added in plain text for visual comparison.</p>

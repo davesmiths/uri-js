@@ -21,6 +21,8 @@ window['github.com/davesmiths/uri-js'] = {
             path,
             colon = ':', // Save a few chars by defining colon.
             slash = '/', // Save a few chars by defining slash.
+            segment = {},
+            segments = colon,
             indexOf = 'indexOf', // Saves a few chars when minifying yet the code remains readable.
             split = 'split',
             shift = 'shift',
@@ -47,6 +49,8 @@ window['github.com/davesmiths/uri-js'] = {
         }
 
         if (scheme === undefined || 'http,https,ftp'[split](scheme, 2)[1]) {
+
+            segments = slash;
 
             // Get the hash:
             // 1. Split URI at #s.
@@ -108,8 +112,30 @@ window['github.com/davesmiths/uri-js'] = {
         // Get Path.
         path = uri || undefined;
 
+        segments = path ? path.replace(/^\//, '').replace(new RegExp(segments+'$'), '').split(segments) : [];
+        for (i = segments.length; i > -1; i--) {
+            if (segments[i]) {
+                segment[segments[i]] = true;
+            }
+        }
+
         // Return Object.
-        return {readonly: {source: source, params: readOnlyParams}, params: params, hash: hash, scheme: scheme, user: user, pass: pass, host: host, port: port, path: path};
+        return {
+            readonly: {
+                source: source,
+                params: readOnlyParams
+            },
+            params: params,
+            hash: hash,
+            scheme: scheme,
+            user: user,
+            pass: pass,
+            host: host,
+            port: port,
+            path: path,
+            segments: segments,
+            segment: segment
+        };
     },
 
     // Use URI.stringify if it exists or create URI.stringify.
